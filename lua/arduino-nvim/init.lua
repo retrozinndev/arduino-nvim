@@ -58,7 +58,34 @@ function M.load_or_create_config()
     end
 end
 
-M.load_or_create_config()
+-- Setup function
+---@param remapKeys nil|boolean Whether to map plugin-exclusive keymaps
+function M.setup(remapKeys)
+    ---@type boolean
+    local remap = true;
+    if type(remapKeys) == "boolean" then
+        remap = remapKeys;
+    end;
+
+    require("arduino-nvim.libGetter");
+
+    -- Map keymaps if enabled to
+    if remap then
+        require("arduino-nvim.remap");
+    end;
+
+    -- Initialize lsp config
+    require("arduino-nvim.lsp").setup();
+
+    vim.api.nvim_create_autocmd("FileType", {
+        pattern = "arduino",
+        desc = "Initialize arduino-nvim configuration",
+        callback = function ()
+            M.load_or_create_config();
+        end
+    });
+end
+
 -- Utility function to strip ANSI escape codes
 local function strip_ansi_codes(line)
     return line:gsub("\27%[[0-9;]*m", "")
@@ -410,4 +437,4 @@ vim.api.nvim_create_user_command("InoSetBaud", function(opts) M.set_baudrate(opt
 vim.api.nvim_create_user_command("InoStatus", function() M.status() end, {})
 vim.api.nvim_create_user_command("InoList", function() M.InoList() end, {})
 
-return M
+return M;
