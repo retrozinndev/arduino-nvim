@@ -68,7 +68,7 @@ local function setup_arduino_lsp()
     check_or_create_sketch_yaml(settings)
     local board = settings.board or "arduino:avr:uno" -- Default fallback
     -- Configure the Arduino language server using loaded settings
-    require('lspconfig').arduino_language_server.setup {
+    vim.lsp.config("arduino_language_server", {
         cmd = {
             "arduino-language-server",
             "-cli", "arduino-cli",
@@ -77,12 +77,12 @@ local function setup_arduino_lsp()
             "-fqbn", board,
         },
         filetypes = { "arduino", "cpp" },
-        root_dir = function(fname)
+        root_dir = function(file)
             return vim.loop.cwd()
         end,
         handlers = {
         }
-    }
+    });
 end
 
 -- Export the setup function
