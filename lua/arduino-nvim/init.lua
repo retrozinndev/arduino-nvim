@@ -1,5 +1,5 @@
-require("arduino-nvim.remap");
-require("arduino-nvim.libGetter");
+require("./remap");
+require("./libGetter");
 
 local M = {}
 
