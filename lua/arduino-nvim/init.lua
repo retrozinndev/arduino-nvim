@@ -1,7 +1,3 @@
-require("arduino-nvim.remap")
-require("arduino-nvim.libGetter")
-
-
 local M = {}
 
 M.board = "arduino:avr:uno"
