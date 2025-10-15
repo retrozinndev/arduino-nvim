@@ -1,6 +1,3 @@
-require("./remap");
-require("./libGetter");
-
 local M = {}
 
 M.board = "arduino:avr:uno"

@@ -26,21 +26,28 @@ A Neovim plugin that provides Arduino IDE-like functionality directly in your ed
 
 ## Installation
 
-1. Clone the repository:
-```sh
-git clone https://github.com/yuukiflow/Arduino-Nvim.git ~/.config/nvim/lua/Arduino-Nvim
+1. Add the plugin to your plugin manager.
+- Example(for vim.pack): 
+```lua
+vim.pack.add({
+    { src = "https://github.com/retrozinndev/arduino-nvim" }
+});
 ```
 
-2. Add the following to your `init.lua`:
+2. Initialize the plugin:
 ```lua
--- Load LSP configuration first
-require("Arduino-Nvim.lsp").setup()
+-- Load util library
+require("arduino-nvim.libGetter");
+-- Add mappings
+require("arduino-nvim.remap");
+-- Load LSP configuration for arduino_language_server
+require("arduino-nvim.lsp").setup();
 
--- Set up Arduino file type detection
+-- Set up Arduino filetype detection
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "arduino",
     callback = function()
-        require("Arduino-Nvim")
+        require("arduino-nvim")
     end
 })
 ```
