@@ -1,7 +1,4 @@
--- Add Lua 5.4 path for dkjson to the Lua package path
-package.path = package.path .. ";/home/edin/.luarocks/share/lua/5.4/?.lua;/home/edin/.luarocks/share/lua/5.4/?/init.lua"
-
-local json = require('dkjson')  -- JSON library for parsing
+local json = require('dkjson.dkjson')  -- JSON library for parsing
 local cache_file = vim.fn.stdpath("cache") .. "/arduino_libs.json"
 local cache_expiration = 7 *  24 * 60 * 60  -- Cache expires in 7 days
 
